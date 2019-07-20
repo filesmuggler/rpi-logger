@@ -22,7 +22,11 @@ Program execution steps:
 ```
 chmod +x rpi-logger.sh
 ```
-5. Run script:
+5. Add script to the user space, to be executed anywhere in the system
+```
+sudo cp rpi-logger.sh /usr/local/bin/
+```
+6. Run script:
 ```
 ./rpi-logger.sh
 ```
