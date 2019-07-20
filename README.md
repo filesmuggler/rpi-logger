@@ -1,5 +1,5 @@
 # RPI Logger
-Bash script for automatic logging into RPI with SSH.
+Bash script for automatic logging into RPI with SSH for developers tired of manual configuration every time they work with their RPI.
 
 ## Requirements 
 Before first use make sure to have nmap, ssh, sshpass and net-tools installed.  
@@ -30,6 +30,7 @@ chmod +x rpi-logger.sh
 ## Known issues
 
 - The script is limited to networks with mask 255.255.255.0.
+- It also uses plain password while logging - potential security risk.
 
 ## Screenshots
 
