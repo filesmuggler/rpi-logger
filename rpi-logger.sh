@@ -1,13 +1,13 @@
 << --MULTILINE-COMMENT--
 RPI Logger
 
-Program purpose: Script for automatic logging into RPI with SSH
+Program purpose: Bash script for automatic logging into RPI with SSH.
 
 Requirements: 
-Before first use make sure to have nmap, ssh, sshpass and net-tools installed 
-For proper operation You MUST provide some data about your RPI
+Before first use make sure to have nmap, ssh, sshpass and net-tools installed .
+For proper operation You MUST provide some data about your RPI.
 
-Progam execution steps:
+Program execution steps:
   - check IP address of your computer (255.255.255.0 mask is assumed)
   - get network address from previously obtained IP address
   - scan network for a host with hostname given by the user

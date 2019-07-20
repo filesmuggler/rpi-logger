@@ -1,12 +1,12 @@
 # RPI Logger
-Script for automatic logging into RPI with SSH.
+Bash script for automatic logging into RPI with SSH.
 
 ## Requirements 
 Before first use make sure to have nmap, ssh, sshpass and net-tools installed.  
 For proper operation You MUST provide some data about your RPI.
 
 ## Algorithm
-Progam execution steps:
+Program execution steps:
   - check IP address of your computer (255.255.255.0 mask is assumed)
   - get network address from previously obtained IP address
   - scan network for a host with hostname given by the user
@@ -15,14 +15,14 @@ Progam execution steps:
 
 ## Setup
 
-1. Download repo
-2. Make sure all tools are installed
-3. Edit raspberry pi hostname, username, password and your network interface variables in the script
-4. Run command 
+1. Download repo.
+2. Make sure all tools are installed.
+3. Edit raspberry pi hostname, username, password and your network interface variables in the script.
+4. Run command:
 '''
 chmod +x rpi-logger.sh
 '''
-5. Run
+5. Run script:
 '''
 ./rpi-logger.sh
 '''
