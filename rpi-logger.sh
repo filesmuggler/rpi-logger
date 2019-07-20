@@ -72,12 +72,12 @@ NETWORK_ADDRESS=$(
         )
 
 RPI_NMAP=""
-RPI_ADR=""
+RPI_ADDRESS=""
 
 # Scaning network for raspberry pi host
 if RPI_NMAP=$(nmap -sn $NETWORK_ADDRESS.0/24 | grep $RPI_HOSTNAME); then
     # Extract ip address of RPI
-    RPI_ADR=$(  
+    RPI_ADDRESS=$(  
                 echo $RPI_NMAP | \
                 grep \
                     --extended-regexp \
@@ -85,7 +85,12 @@ if RPI_NMAP=$(nmap -sn $NETWORK_ADDRESS.0/24 | grep $RPI_HOSTNAME); then
                     --only-matching \
                     '\b[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\b'\
             )
+
+    # Connect to RPI
+    sshpass -p $RPI_PASSWORD ssh -o StrictHostKeyChecking=no $RPI_USER@$RPI_ADDRESS
+else
+    # RPI not found
+    echo "RPI with hostname '$RPI_HOSTNAME' was not found in your network ($NETWORK_ADDRESS.0/24)."
+    echo "Make sure RPI is connect to your network and if credentials, defined in this script, are correct."
 fi
 
-# Connect to RPI
-sshpass -p $RPI_PASSWORD ssh -o StrictHostKeyChecking=no $RPI_USER@$RPI_ADR
