@@ -45,6 +45,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to StackOverflow
+* Hat tip to StackOverflow 🎩
 * Stay hungry. Stay foolish.
 
