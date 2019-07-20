@@ -22,7 +22,7 @@ Program execution steps:
 ```
 chmod +x rpi-logger.sh
 ```
-5. Add script to the user space, to be executed anywhere in the system
+5. Add script to the user space, to be executed anywhere in the system.
 ```
 sudo cp rpi-logger.sh /usr/local/bin/
 ```
@@ -37,9 +37,9 @@ sudo cp rpi-logger.sh /usr/local/bin/
 - It also uses plain password while logging - potential security risk.
 
 ## Screenshots
-* Correct execution ![RPI Logger Execution](screenshots/rpi-logger-1.png)
+* Correct execution. ![RPI Logger Execution](screenshots/rpi-logger-1.png)
 
-* RPI not found ![RPI Logger Error](screenshots/rpi-logger-2.png)
+* RPI not found. ![RPI Logger Error](screenshots/rpi-logger-2.png)
 
 ## Authors
 
