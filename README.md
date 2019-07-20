@@ -13,9 +13,27 @@ Progam execution steps:
   - get IP address of RPI 
   - connect to RPI with sshpass over SSH
 
+## Setup
+
+1. Download repo
+2. Make sure all tools are installed
+3. Edit raspberry pi hostname, username, password and your network interface variables in the script
+4. Run command 
+'''
+chmod +x rpi-logger.sh
+'''
+5. Run
+'''
+./rpi-logger.sh
+'''
+
 ## Known issues
 
+- The script is limited to networks with mask 255.255.255.0
+
 ## Screenshots
+
+![RPI Logger Execution](http://www.github.com/filesmuggler/rpi-logger/screenshots/rpi-logger.png)
 
 ## Authors
 
