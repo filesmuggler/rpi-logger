@@ -33,7 +33,7 @@ chmod +x rpi-logger.sh
 
 ## Screenshots
 
-![RPI Logger Execution](http://raw.githubusercontent.com/filesmuggler/rpi-logger/screenshots/rpi-logger.png)
+![RPI Logger Execution](screenshots/rpi-logger.png)
 
 ## Authors
 
