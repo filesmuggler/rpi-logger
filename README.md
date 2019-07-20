@@ -1,9 +1,9 @@
 # RPI Logger
-Script for automatic logging into RPI with SSH
+Script for automatic logging into RPI with SSH.
 
 ## Requirements 
-Before first use make sure to have nmap, ssh, sshpass and net-tools installed 
-For proper operation You MUST provide some data about your RPI
+Before first use make sure to have nmap, ssh, sshpass and net-tools installed.  
+For proper operation You MUST provide some data about your RPI.
 
 ## Algorithm
 Progam execution steps:
@@ -29,7 +29,7 @@ chmod +x rpi-logger.sh
 
 ## Known issues
 
-- The script is limited to networks with mask 255.255.255.0
+- The script is limited to networks with mask 255.255.255.0.
 
 ## Screenshots
 
@@ -41,7 +41,7 @@ chmod +x rpi-logger.sh
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Acknowledgments
 
