@@ -33,8 +33,9 @@ chmod +x rpi-logger.sh
 - It also uses plain password while logging - potential security risk.
 
 ## Screenshots
+* Correct execution ![RPI Logger Execution](screenshots/rpi-logger.png)
 
-![RPI Logger Execution](screenshots/rpi-logger.png)
+* RPI not found ![RPI Logger Error](screenshots/rpi-logger-error.png)
 
 ## Authors
 
