@@ -18,6 +18,7 @@ Program execution steps:
 1. Download repo.
 2. Make sure all tools are installed.
 3. Edit raspberry pi hostname, username, password and your network interface variables in the script.
+![RPI Variable Set](screenshots/rpi-logger-3.png)
 4. Run command:
 ```
 chmod +x rpi-logger.sh
