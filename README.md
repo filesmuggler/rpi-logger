@@ -19,13 +19,14 @@ Program execution steps:
 2. Make sure all tools are installed.
 3. Run 
 ```
-bash install.sh
+bash add-pi.sh
 ```
-4. Configure raspberry pi hostname, username, password and your network interface.
+4. Configure raspberry pi hostname, username, password, nickname and your network interface.
 5. Run script:
 ```
-bash rpi-logger.sh
+bash rpi-logger.sh <nickname>
 ```
+Where <nickname> is the same as you given during configuration step.
 
 ## Known issues
 
@@ -47,6 +48,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Version
 
+* v3.0 - multiple RPI hosts supported
 * v2.0 - installing script added
 * v1.0 - manual credentials change
 

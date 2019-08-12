@@ -1,5 +1,5 @@
 << --MULTIword-COMMENT--
-RPI Logger v2.0
+RPI Logger v3.0
 
 Program purpose: Bash script for automatic logging into RPI with SSH.
 
@@ -40,43 +40,31 @@ SOFTWARE.
 
 #!/bin/bash
 
-## Variables set by user
-RPI_HOSTNAME="x"    # raspberry pi hostname, for Raspbian default is "raspberry", for Ubuntu is "ubuntu"
-RPI_USER="x"        # user name on rpi, for Raspian default is "pi", for Ubuntu is "ubuntu"
-RPI_PASSWORD="x"    # password for user account above, for Raspbian default is "raspberry", for Ubuntu is "ubuntu"
-INTERFACE_NAME="x"  # name of the network interface i.e. eth0, wlan0, wlp2s0, ..., no default - have to check it yourself :(
+## Config variables
+RPI_NICKNAME="none"    # rpi nickname given by user
+RPI_HOSTNAME="none"    # raspberry pi hostname, for Raspbian default is "raspberry", for Ubuntu is "ubuntu"
+RPI_USER="none"        # user name on rpi, for Raspian default is "pi", for Ubuntu is "ubuntu"
+RPI_PASSWORD="none"    # password for user account above, for Raspbian default is "raspberry", for Ubuntu is "ubuntu"
+INTERFACE_NAME="none"  # name of the network interface i.e. eth0, wlan0, wlp2s0, ..., no default - have to check it yourself :(
 
-PATH_TO_DATA="/usr/local/bin/.config.txt"
 
-COUNTER=0
-IFS=$'\n'
-while read -r value
+## Args reading
+RPI_NICKNAME=$1
+
+## Path to config file with credentials
+PATH_TO_DATA="/usr/local/bin/.config.csv"
+
+while IFS=$',' read -r col1 col2 col3 col4 col5
 do
-    if [ "$COUNTER" -eq "0" ];
-        then
-            RPI_PASSWORD=$value   
-            echo "This is password: $RPI_PASSWORD $COUNTER"                
-    elif [ "$COUNTER" -eq "1" ];
-        then        
-            RPI_USER=$value
-            echo "This is username: $RPI_USER $COUNTER"
-    elif [ "$COUNTER" -eq "2" ];
-        then
-            RPI_HOSTNAME=$value       
-            echo "This is hostname: $RPI_HOSTNAME $COUNTER"
-    elif [ "$COUNTER" -eq "3" ];
-        then        
-            INTERFACE_NAME=$value
-            echo "This is interface: $INTERFACE_NAME $COUNTER" 
+    if [ "$RPI_NICKNAME" = "$col1" ]; then
+        RPI_HOSTNAME=$col2
+        RPI_USER=$col3
+        RPI_PASSWORD=$col4
+        INTERFACE_NAME=$col5
     fi
-    ((COUNTER=COUNTER+1))
-    
 done < "$PATH_TO_DATA"
 
-echo "checking ip for $INTERFACE_NAME"
-#echo ifconfig $INTERFACE_NAME
-
-# Checking IP address with ifconfig tool (from net-tools package)
+## Checking IP address with ifconfig tool (from net-tools package)
 IP_ADDRESS=$( 
             echo $(\
                     ifconfig $INTERFACE_NAME | \
@@ -90,10 +78,8 @@ IP_ADDRESS=$(
             cut -d' ' -f1 \
         )
 
-#echo "This is interface $INTERFACE_NAME" 
 
-
-# Extracting network address
+## Extracting network address
 NETWORK_ADDRESS=$(
             echo $IP_ADDRESS | \
             grep \
@@ -107,9 +93,11 @@ NETWORK_ADDRESS=$(
 RPI_NMAP=""
 RPI_ADDRESS=""
 
-# Scaning network for raspberry pi host
+## Scaning network for raspberry pi host
 if RPI_NMAP=$(nmap -sn $NETWORK_ADDRESS.0/24 | grep $RPI_HOSTNAME); then
+    # For newer routers (which return hostname)
     # Extract ip address of RPI
+    echo "nmap"
     RPI_ADDRESS=$(  
                 echo $RPI_NMAP | \
                 grep \
@@ -118,7 +106,6 @@ if RPI_NMAP=$(nmap -sn $NETWORK_ADDRESS.0/24 | grep $RPI_HOSTNAME); then
                     --only-matching \
                     '\b[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\b'\
             )
-
     # Connect to RPI
     sshpass -p $RPI_PASSWORD ssh -o StrictHostKeyChecking=no $RPI_USER@$RPI_ADDRESS
 else
