@@ -1,5 +1,5 @@
-<< --MULTILINE-COMMENT--
-RPI Logger
+<< --MULTIword-COMMENT--
+RPI Logger v2.0
 
 Program purpose: Bash script for automatic logging into RPI with SSH.
 
@@ -13,7 +13,6 @@ Program execution steps:
   - scan network for a host with hostname given by the user
   - get IP address of RPI 
   - connect to RPI with sshpass over SSH
-
 
 MIT License
 
@@ -37,15 +36,45 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
---MULTILINE-COMMENT--
+--MULTIword-COMMENT--
 
 #!/bin/bash
 
 ## Variables set by user
-RPI_HOSTNAME="raspberry"    # raspberry pi hostname, for Raspbian default is "raspberry", for Ubuntu is "ubuntu"
-RPI_USER="pi"               # user name on rpi, for Raspian default is "pi", for Ubuntu is "ubuntu"
-RPI_PASSWORD="raspberry"    # password for user account above, for Raspbian default is "raspberry", for Ubuntu is "ubuntu"
-INTERFACE_NAME="wlp2s0"     # name of the network interface i.e. eth0, wlan0, wlp2s0, ..., no default - have to check it yourself :(
+RPI_HOSTNAME="x"    # raspberry pi hostname, for Raspbian default is "raspberry", for Ubuntu is "ubuntu"
+RPI_USER="x"        # user name on rpi, for Raspian default is "pi", for Ubuntu is "ubuntu"
+RPI_PASSWORD="x"    # password for user account above, for Raspbian default is "raspberry", for Ubuntu is "ubuntu"
+INTERFACE_NAME="x"  # name of the network interface i.e. eth0, wlan0, wlp2s0, ..., no default - have to check it yourself :(
+
+PATH_TO_DATA="/usr/local/bin/.config.txt"
+
+COUNTER=0
+IFS=$'\n'
+while read -r value
+do
+    if [ "$COUNTER" -eq "0" ];
+        then
+            RPI_PASSWORD=$value   
+            echo "This is password: $RPI_PASSWORD $COUNTER"                
+    elif [ "$COUNTER" -eq "1" ];
+        then        
+            RPI_USER=$value
+            echo "This is username: $RPI_USER $COUNTER"
+    elif [ "$COUNTER" -eq "2" ];
+        then
+            RPI_HOSTNAME=$value       
+            echo "This is hostname: $RPI_HOSTNAME $COUNTER"
+    elif [ "$COUNTER" -eq "3" ];
+        then        
+            INTERFACE_NAME=$value
+            echo "This is interface: $INTERFACE_NAME $COUNTER" 
+    fi
+    ((COUNTER=COUNTER+1))
+    
+done < "$PATH_TO_DATA"
+
+echo "checking ip for $INTERFACE_NAME"
+#echo ifconfig $INTERFACE_NAME
 
 # Checking IP address with ifconfig tool (from net-tools package)
 IP_ADDRESS=$( 
@@ -61,6 +90,9 @@ IP_ADDRESS=$(
             cut -d' ' -f1 \
         )
 
+#echo "This is interface $INTERFACE_NAME" 
+
+
 # Extracting network address
 NETWORK_ADDRESS=$(
             echo $IP_ADDRESS | \
@@ -70,6 +102,7 @@ NETWORK_ADDRESS=$(
                 --only-matching \
                 '\b[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\b'\
         )
+
 
 RPI_NMAP=""
 RPI_ADDRESS=""

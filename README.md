@@ -17,19 +17,14 @@ Program execution steps:
 
 1. Download repo.
 2. Make sure all tools are installed.
-3. Edit raspberry pi hostname, username, password and your network interface variables in the script.
-![RPI Variable Set](screenshots/rpi-logger-3.png)
-4. Run command:
+3. Run 
 ```
-chmod +x rpi-logger.sh
+bash install.sh
 ```
-5. Add script to the user space, to be executed anywhere in the system.
+4. Configure raspberry pi hostname, username, password and your network interface.
+5. Run script:
 ```
-sudo cp rpi-logger.sh /usr/local/bin/
-```
-6. Run script:
-```
-./rpi-logger.sh
+bash rpi-logger.sh
 ```
 
 ## Known issues
@@ -49,6 +44,11 @@ sudo cp rpi-logger.sh /usr/local/bin/
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Version
+
+* v2.0 - installing script added
+* v1.0 - manual credentials change
 
 ## Acknowledgments
 
